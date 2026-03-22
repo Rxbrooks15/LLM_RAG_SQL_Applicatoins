@@ -1,24 +1,23 @@
 # AI SQL Query Generator
+This demonstration application presents a Query RAG framework for AI-powered SQL generation over uploaded CSV datasets. Users provide natural-language questions, and the system automatically profiles the data, extracts schema-aware metadata, and retrieves only the most relevant context needed to ground SQL synthesis. The design explicitly addresses current RAG limitations, including retrieval noise, weak ranking over structured data, and the tradeoff between long-context prompting and generation reliability. 
 
-A demonstration application showcasing Query RAG (Retrieval-Augmented Generation) capabilities with AI-powered SQL query generation. This application allows users to upload CSV files, automatically analyze their contents, and use natural language to query the data through an AI workflow.
+Instead of overloading the model context window, the pipeline performs selective retrieval and staged reasoning across MCP-like components for schema interpretation, query planning, SQL generation, validation, and execution. The result is a more controllable and efficient natural-language analytics workflow that reduces hallucinations, improves SQL fidelity, and demonstrates why retrieval orchestration remains essential even in the era of large context-window models.
 
-You can watch the full video here:
 
-[![Learn about Query RAG](https://img.youtube.com/vi/5LIfSpr3GDM/0.jpg)](https://youtu.be/5LIfSpr3GDM)
-> 🎥 How to build advanced RAG systems with AI-generated SQL
+## Components
 
-## Features
-
-- 📤 CSV file upload with drag-and-drop support
-- 📊 Automatic schema detection and PostgreSQL table creation
-- 🤖 AI-powered natural language to SQL conversion
-- 🔍 Smart query analysis and validation
-- 💡 Intelligent error handling and query regeneration
-- 🎯 Context-aware responses based on available data
+📤 Ingestion pipeline for CSV uploads with drag-and-drop interface, enabling user-provided tabular datasets to be parsed, validated, and staged for downstream processing.
+📊 Automated schema inference and PostgreSQL table materialization, including column type detection, structural profiling, and dynamic table creation based on uploaded dataset characteristics.
+🤖 LLM-driven natural language–to–SQL translation, transforming user intent into executable SQL queries through prompt-engineered semantic parsing over relational metadata.
+🔍 Query reasoning, validation, and execution safety checks, with pre-execution analysis to detect malformed logic, incompatible joins, invalid column references, and other structural inconsistencies.
+💡 Iterative error recovery and SQL regeneration loop, leveraging model-assisted debugging to reinterpret failed queries, correct syntax/semantic issues, and resubmit improved SQL candidates.
+🎯 Context-aware response generation grounded in dataset schema and query results, ensuring outputs are informed by available tables, attribute relationships, and returned records rather than generic text generation.
 
 ## Architecture
 
-![AI SQL Query Generator Architecture](./architecture.png)
+https://lucid.app/lucidchart/20f33f65-6336-4d5d-86c4-db985ac62f31/edit?invitationId=inv_32aa0584-951d-4180-9cc2-137e61241edd&page=0_0#
+## Nuances between Vector Search and Database search
+<img width="611" height="433" alt="Screenshot 2026-03-19 202419" src="https://github.com/user-attachments/assets/4d437879-0c6c-4100-a882-8c9765c84d41" />\
 
 The application consists of two main components:
 
